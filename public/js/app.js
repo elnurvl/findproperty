@@ -3597,13 +3597,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Home",
   data: function data() {
     return {
       input: "",
+      bedrooms: null,
+      bathrooms: null,
+      garages: null,
+      storeys: null,
+      low: undefined,
+      high: undefined,
       loading: false,
-      houses: []
+      houses: [],
+      query: {}
     };
   },
   watch: {
@@ -3612,20 +3643,109 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log('changed');
       this.loading = true;
-      axios.get("/houses?name=".concat(this.input)).then(function (res) {
+      this.query.name = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
         console.log(res.data);
         _this.houses = res.data;
         _this.loading = false;
       });
+    },
+    bedrooms: function bedrooms(val) {
+      var _this2 = this;
+
+      this.loading = true;
+      this.query.bedrooms = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this2.houses = res.data;
+        _this2.loading = false;
+      });
+    },
+    bathrooms: function bathrooms(val) {
+      var _this3 = this;
+
+      this.loading = true;
+      this.query.bathrooms = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this3.houses = res.data;
+        _this3.loading = false;
+      });
+    },
+    garages: function garages(val) {
+      var _this4 = this;
+
+      this.loading = true;
+      this.query.garages = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this4.houses = res.data;
+        _this4.loading = false;
+      });
+    },
+    storeys: function storeys(val) {
+      var _this5 = this;
+
+      this.loading = true;
+      this.query.storeys = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this5.houses = res.data;
+        _this5.loading = false;
+      });
+    },
+    low: function low(val, old) {
+      var _this6 = this;
+
+      if (val > this.high) {
+        this.low = this.high - 1;
+      }
+
+      this.loading = true;
+      this.query.low = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this6.houses = res.data;
+        _this6.loading = false;
+      });
+    },
+    high: function high(val) {
+      var _this7 = this;
+
+      if (val < this.low) {
+        this.high = this.low + 1;
+      }
+
+      this.loading = true;
+      this.query.high = val;
+      axios.get("/houses", {
+        params: this.query
+      }).then(function (res) {
+        console.log(res.data);
+        _this7.houses = res.data;
+        _this7.loading = false;
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this8 = this;
 
     this.loading = true;
     axios.get("/houses?name=".concat(this.input)).then(function (res) {
-      _this2.houses = res.data;
-      _this2.loading = false;
+      _this8.houses = res.data;
+      _this8.loading = false;
     });
   }
 });
@@ -99990,6 +100110,160 @@ var render = function() {
                     _vm.input = $$v
                   },
                   expression: "input"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "el-select",
+                {
+                  attrs: { placeholder: "Bedrooms" },
+                  model: {
+                    value: _vm.bedrooms,
+                    callback: function($$v) {
+                      _vm.bedrooms = $$v
+                    },
+                    expression: "bedrooms"
+                  }
+                },
+                [
+                  _c("el-option", {
+                    attrs: { label: "Any number of bedrooms", value: null }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(10, function(n) {
+                    return _c("el-option", {
+                      key: n,
+                      attrs: { label: n, value: n }
+                    })
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "el-select",
+                {
+                  attrs: { placeholder: "Bathrooms" },
+                  model: {
+                    value: _vm.bathrooms,
+                    callback: function($$v) {
+                      _vm.bathrooms = $$v
+                    },
+                    expression: "bathrooms"
+                  }
+                },
+                [
+                  _c("el-option", {
+                    attrs: { label: "Any number of bathrooms", value: null }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(10, function(n) {
+                    return _c("el-option", {
+                      key: n,
+                      attrs: { label: n, value: n }
+                    })
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "el-select",
+                {
+                  attrs: { placeholder: "Garages" },
+                  model: {
+                    value: _vm.garages,
+                    callback: function($$v) {
+                      _vm.garages = $$v
+                    },
+                    expression: "garages"
+                  }
+                },
+                [
+                  _c("el-option", {
+                    attrs: { label: "Any number of garages", value: null }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(10, function(n) {
+                    return _c("el-option", {
+                      key: n,
+                      attrs: { label: n, value: n }
+                    })
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "el-select",
+                {
+                  attrs: { placeholder: "Any number of storeys" },
+                  model: {
+                    value: _vm.storeys,
+                    callback: function($$v) {
+                      _vm.storeys = $$v
+                    },
+                    expression: "storeys"
+                  }
+                },
+                [
+                  _c("el-option", {
+                    attrs: { label: "Does not matter", value: null }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(10, function(n) {
+                    return _c("el-option", {
+                      key: n,
+                      attrs: { label: n, value: n }
+                    })
+                  })
+                ],
+                2
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-row",
+        [
+          _c(
+            "el-col",
+            { attrs: { span: 4 } },
+            [
+              _c("el-input-number", {
+                attrs: { min: 0, controls: false, placeholder: "Lowest price" },
+                model: {
+                  value: _vm.low,
+                  callback: function($$v) {
+                    _vm.low = $$v
+                  },
+                  expression: "low"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 4 } },
+            [
+              _c("el-input-number", {
+                attrs: {
+                  min: 0,
+                  controls: false,
+                  placeholder: "Highest price"
+                },
+                model: {
+                  value: _vm.high,
+                  callback: function($$v) {
+                    _vm.high = $$v
+                  },
+                  expression: "high"
                 }
               })
             ],
