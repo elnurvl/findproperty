@@ -31,6 +31,12 @@ class HouseController extends Controller
         if ($request->has('storeys')) {
             $houses->where('storeys', $request->input('storeys'));
         }
+        if ($request->has('low')) {
+            $houses->where('price', '>=', $request->input('low'));
+        }
+        if ($request->has('high')) {
+            $houses->where('price', '<=', $request->input('high'));
+        }
         return response()->json($houses->get());
     }
 
