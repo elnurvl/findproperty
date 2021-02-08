@@ -1,72 +1,96 @@
 <template>
     <div>
-        <el-row>
-            <el-col :span="12">
-                <el-input placeholder="Please input" v-model="input"></el-input>
-                <el-select placeholder="Bedrooms" v-model="bedrooms">
-                    <el-option label="Any number of bedrooms" :value="null"></el-option>
-                    <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
-                </el-select>
-                <el-select placeholder="Bathrooms" v-model="bathrooms">
-                    <el-option label="Any number of bathrooms" :value="null"></el-option>
-                    <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
-                </el-select>
-                <el-select placeholder="Garages" v-model="garages">
-                    <el-option label="Any number of garages" :value="null"></el-option>
-                    <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
-                </el-select>
-                <el-select placeholder="Any number of storeys" v-model="storeys">
-                    <el-option label="Does not matter" :value="null"></el-option>
-                    <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
-                </el-select>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col :span="4">
-                <el-input-number v-model="low" :min="0" :controls="false" placeholder="Lowest price"></el-input-number>
-            </el-col>
-            <el-col :span="4">
-                <el-input-number v-model="high" :min="0" :controls="false" placeholder="Highest price"></el-input-number>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col :span="24">
-                <el-table
-                    v-loading="loading"
-                    :data="houses"
-                    style="width: 100%">
-                    <el-table-column
-                        prop="name"
-                        label="Name"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="price"
-                        label="Price">
-                    </el-table-column>
-                    <el-table-column
-                        prop="bedrooms"
-                        label="Bedrooms"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="bathrooms"
-                        label="Bathrooms"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="garages"
-                        label="Garages"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="storeys"
-                        label="Storeys"
-                        width="180">
-                    </el-table-column>
-                </el-table>
-            </el-col>
-        </el-row>
+        <el-container>
+            <el-aside width="400px">
+                <el-row>
+                    <el-col :span="12">
+                        <el-select size="mini" placeholder="Bedrooms" v-model="bedrooms">
+                            <el-option label="Any number of bedrooms" :value="null"></el-option>
+                            <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-select size="mini" placeholder="Bathrooms" v-model="bathrooms">
+                            <el-option label="Any number of bathrooms" :value="null"></el-option>
+                            <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-select size="mini" placeholder="Garages" v-model="garages">
+                            <el-option label="Any number of garages" :value="null"></el-option>
+                            <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-select size="mini" placeholder="Storeys" v-model="storeys">
+                            <el-option label="Any number of storeys" :value="null"></el-option>
+                            <el-option v-for="n in 10" :key="n" :label="n" :value="n"></el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="8">
+                        <el-input-number size="mini" v-model="low" :min="0" :controls="false" placeholder="Lowest price"></el-input-number>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input-number size="mini" v-model="high" :min="0" :controls="false" placeholder="Highest price"></el-input-number>
+                    </el-col>
+                </el-row>
+            </el-aside>
+            <el-main>
+                <el-row>
+                    <el-col :span="12">
+                        <el-input placeholder="Name of the house" v-model="input"></el-input>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24">
+                        <el-table
+                            size="mini"
+                            v-loading="loading"
+                            :data="houses"
+                            style="width: 100%">
+                            <el-table-column
+                                prop="name"
+                                label="Name"
+                                width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="price"
+                                label="Price">
+                            </el-table-column>
+                            <el-table-column
+                                prop="bedrooms"
+                                label="Bedrooms"
+                                width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="bathrooms"
+                                label="Bathrooms"
+                                width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="garages"
+                                label="Garages"
+                                width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="storeys"
+                                label="Storeys"
+                                width="180">
+                            </el-table-column>
+                        </el-table>
+                    </el-col>
+                </el-row>
+            </el-main>
+        </el-container>
     </div>
 </template>
 
@@ -176,5 +200,14 @@ name: "Home",
 </script>
 
 <style scoped>
+.el-row {
+    margin-bottom: 5px;
+}
+.el-aside {
+    margin: 20px;
+}
 
+.el-table {
+    margin-top: 50px;
+}
 </style>
