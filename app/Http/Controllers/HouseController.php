@@ -19,7 +19,18 @@ class HouseController extends Controller
     public function index(Request $request, House $house): JsonResponse
     {
         $houses = $house->newQuery();
-
+        if ($request->has('bedrooms')) {
+            $houses->where('bedrooms', $request->input('bedrooms'));
+        }
+        if ($request->has('bathrooms')) {
+            $houses->where('bathrooms', $request->input('bathrooms'));
+        }
+        if ($request->has('garages')) {
+            $houses->where('garages', $request->input('garages'));
+        }
+        if ($request->has('storeys')) {
+            $houses->where('storeys', $request->input('storeys'));
+        }
         return response()->json($houses->get());
     }
 

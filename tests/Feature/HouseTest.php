@@ -23,4 +23,52 @@ class HouseTest extends TestCase
 
         $response->assertStatus(200)->assertJsonCount(10);
     }
+
+    /**
+     * @test
+     */
+    public function bedrooms_filter_returns_houses_with_exact_match()
+    {
+        $rooms = 2;
+        House::factory()->count(3)->create(['bedrooms' => 2]);
+        House::factory()->count(5)->create(['bedrooms' => 4]);
+        $response = $this->get("/houses?bedrooms=$rooms");
+        $response->assertStatus(200)->assertJsonCount(3);
+    }
+
+    /**
+     * @test
+     */
+    public function bathrooms_filter_returns_houses_with_exact_match()
+    {
+        $rooms = 2;
+        House::factory()->count(3)->create(['bathrooms' => 2]);
+        House::factory()->count(5)->create(['bathrooms' => 4]);
+        $response = $this->get("/houses?bathrooms=$rooms");
+        $response->assertStatus(200)->assertJsonCount(3);
+    }
+
+    /**
+     * @test
+     */
+    public function garages_filter_returns_houses_with_exact_match()
+    {
+        $rooms = 2;
+        House::factory()->count(3)->create(['garages' => 2]);
+        House::factory()->count(5)->create(['garages' => 4]);
+        $response = $this->get("/houses?garages=$rooms");
+        $response->assertStatus(200)->assertJsonCount(3);
+    }
+
+    /**
+     * @test
+     */
+    public function storeys_filter_returns_houses_with_exact_match()
+    {
+        $rooms = 2;
+        House::factory()->count(3)->create(['storeys' => 2]);
+        House::factory()->count(5)->create(['storeys' => 4]);
+        $response = $this->get("/houses?storeys=$rooms");
+        $response->assertStatus(200)->assertJsonCount(3);
+    }
 }
