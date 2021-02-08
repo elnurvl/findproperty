@@ -10,7 +10,9 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
+        "@babel/preset-env": "^7.12.13",
+        "axios": "^0.21.1",
+        "babel-plugin-component": "^1.1.1",
         "bootstrap": "^4.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
@@ -21,6 +23,11 @@
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
+        "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "element-ui": "^2.15.0",
+        "vue-axios": "^3.2.4"
     }
 }
