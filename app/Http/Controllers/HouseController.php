@@ -37,6 +37,9 @@ class HouseController extends Controller
         if ($request->has('high')) {
             $houses->where('price', '<=', $request->input('high'));
         }
+        if ($request->has('name')) {
+            $houses->where('name', 'like', "%".$request->input('name')."%");
+        }
         return response()->json($houses->get());
     }
 

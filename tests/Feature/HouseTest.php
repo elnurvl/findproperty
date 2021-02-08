@@ -92,4 +92,48 @@ class HouseTest extends TestCase
         $response = $this->get("/houses?low=$lowPrice&high=$highPrice");
         $response->assertStatus(200)->assertJsonCount(3);
     }
+
+    /** @test  */
+    public function name_filter_returns_houses_with_similar_names()
+    {
+        House::factory()->create(['name' => "The Victoria"]);
+
+        $response = $this->get("/houses?name=vic");
+        $response->assertStatus(200)->assertJsonCount(1);
+
+        $response = $this->get("/houses?name=vyc");
+        $response->assertStatus(200)->assertJsonCount(0);
+    }
+
+    /** @test  */
+    public function using_multiple_filters_simultaneously_returns_relevant_results()
+    {
+        House::factory()->create([
+            'name' => "The Victoria",
+            'price' => 300000,
+            'bedrooms' => 2,
+            'bathrooms' => 1,
+            'garages' => 1,
+            'storeys' => 1
+        ]);
+        House::factory()->create([
+            'name' => "The Victoria",
+            'price' => 300000,
+            'bedrooms' => 2,
+            'bathrooms' => 2,
+            'garages' => 1,
+            'storeys' => 1
+        ]);
+        House::factory()->create([
+            'name' => "The Victoria",
+            'price' => 700000,
+            'bedrooms' => 2,
+            'bathrooms' => 1,
+            'garages' => 1,
+            'storeys' => 1
+        ]);
+
+        $response = $this->get("/houses?name=vic&bedrooms=2&bathrooms=1&garages=1&storeys=1&low=300000&high=500000");
+        $response->assertStatus(200)->assertJsonCount(1);
+    }
 }
