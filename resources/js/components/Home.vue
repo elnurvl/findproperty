@@ -3,6 +3,11 @@
         <el-container>
             <el-aside width="400px">
                 <el-row>
+                    <el-col>
+                        <h1>Filters</h1>
+                    </el-col>
+                </el-row>
+                <el-row>
                     <el-col :span="12">
                         <el-select size="mini" placeholder="Bedrooms" v-model="bedrooms">
                             <el-option label="Any number of bedrooms" :value="null"></el-option>
@@ -46,8 +51,13 @@
             </el-aside>
             <el-main>
                 <el-row>
+                    <el-col>
+                        <h1>Property search</h1>
+                    </el-col>
+                </el-row>
+                <el-row>
                     <el-col :span="12">
-                        <el-input placeholder="Name of the house" v-model="input"></el-input>
+                        <el-input placeholder="Name of the property" v-model="input"></el-input>
                     </el-col>
                 </el-row>
                 <el-row>
