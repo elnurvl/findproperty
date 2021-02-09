@@ -3658,12 +3658,35 @@ __webpack_require__.r(__webpack_exports__);
       high: undefined,
       loading: false,
       houses: [],
-      query: {}
+      query: {},
+      errorMessage: undefined
     };
   },
+  methods: {
+    finalizeRequest: function finalizeRequest() {
+      this.loading = false;
+    },
+    reportErrors: function reportErrors(err) {
+      this.errorMessage = err;
+      this.houses = [];
+    }
+  },
   watch: {
-    input: function input(val) {
+    errorMessage: function errorMessage(val, old) {
       var _this = this;
+
+      if (old === undefined) {
+        this.$notify.error({
+          title: 'Error',
+          message: val,
+          onClose: function onClose() {
+            _this.errorMessage = undefined;
+          }
+        });
+      }
+    },
+    input: function input(val) {
+      var _this2 = this;
 
       console.log('changed');
       this.loading = true;
@@ -3672,12 +3695,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this.houses = res.data;
-        _this.loading = false;
-      });
+        _this2.houses = res.data;
+        _this2.loading = false;
+      })["catch"](function (err) {
+        _this2.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     bedrooms: function bedrooms(val) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.loading = true;
       this.query.bedrooms = val;
@@ -3685,12 +3710,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this2.houses = res.data;
-        _this2.loading = false;
-      });
+        _this3.houses = res.data;
+        _this3.loading = false;
+      })["catch"](function (err) {
+        _this3.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     bathrooms: function bathrooms(val) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.loading = true;
       this.query.bathrooms = val;
@@ -3698,12 +3725,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this3.houses = res.data;
-        _this3.loading = false;
-      });
+        _this4.houses = res.data;
+        _this4.loading = false;
+      })["catch"](function (err) {
+        _this4.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     garages: function garages(val) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.loading = true;
       this.query.garages = val;
@@ -3711,12 +3740,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this4.houses = res.data;
-        _this4.loading = false;
-      });
+        _this5.houses = res.data;
+        _this5.loading = false;
+      })["catch"](function (err) {
+        _this5.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     storeys: function storeys(val) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.loading = true;
       this.query.storeys = val;
@@ -3724,12 +3755,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this5.houses = res.data;
-        _this5.loading = false;
-      });
+        _this6.houses = res.data;
+        _this6.loading = false;
+      })["catch"](function (err) {
+        _this6.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     low: function low(val, old) {
-      var _this6 = this;
+      var _this7 = this;
 
       if (val > this.high) {
         this.low = this.high - 1;
@@ -3741,12 +3774,14 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this6.houses = res.data;
-        _this6.loading = false;
-      });
+        _this7.houses = res.data;
+        _this7.loading = false;
+      })["catch"](function (err) {
+        _this7.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     },
     high: function high(val) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (val < this.low) {
         this.high = this.low + 1;
@@ -3758,19 +3793,24 @@ __webpack_require__.r(__webpack_exports__);
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this7.houses = res.data;
-        _this7.loading = false;
-      });
+        _this8.houses = res.data;
+        _this8.loading = false;
+      })["catch"](function (err) {
+        _this8.reportErrors(err);
+      })["finally"](this.finalizeRequest);
     }
   },
   mounted: function mounted() {
-    var _this8 = this;
+    var _this9 = this;
 
     this.loading = true;
     axios.get("/houses?name=".concat(this.input)).then(function (res) {
-      _this8.houses = res.data;
-      _this8.loading = false;
-    });
+      _this9.houses = res.data;
+      _this9.loading = false;
+      _this9.error = null;
+    })["catch"](function (err) {
+      _this9.reportErrors(err);
+    })["finally"](this.finalizeRequest);
   }
 });
 

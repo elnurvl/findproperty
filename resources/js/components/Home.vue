@@ -107,19 +107,44 @@ name: "Home",
         high: undefined,
         loading: false,
         houses: [],
-        query: {}
+        query: {},
+        errorMessage: undefined
     }),
+    methods: {
+        finalizeRequest() {
+            this.loading = false
+        },
+        reportErrors(err) {
+            this.errorMessage = err
+            this.houses = []
+        }
+    },
     watch: {
+        errorMessage: function (val, old) {
+            if (old === undefined) {
+                this.$notify.error({
+                    title: 'Error',
+                    message: val,
+                    onClose: () => {
+                        this.errorMessage = undefined
+                    }
+                });
+            }
+        },
         input: function (val) {
             console.log('changed')
             this.loading = true;
             this.query.name = val
             axios.get(`/houses`, {params: this.query})
-            .then(res => {
-                console.log(res.data)
-                this.houses = res.data
-                this.loading = false
-            })
+                .then(res => {
+                    console.log(res.data)
+                    this.houses = res.data
+                    this.loading = false
+                })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         bedrooms: function (val) {
             this.loading = true;
@@ -130,6 +155,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         bathrooms: function (val) {
             this.loading = true;
@@ -140,6 +169,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         garages: function (val) {
             this.loading = true;
@@ -150,6 +183,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         storeys: function (val) {
             this.loading = true;
@@ -160,6 +197,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         low: function (val, old) {
             if (val > this.high) {
@@ -173,6 +214,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         },
         high: function (val) {
             if (val < this.low) {
@@ -186,6 +231,10 @@ name: "Home",
                     this.houses = res.data
                     this.loading = false
                 })
+                .catch(err => {
+                    this.reportErrors(err)
+                })
+                .finally(this.finalizeRequest)
         }
     },
     mounted() {
@@ -194,7 +243,12 @@ name: "Home",
             .then(res => {
                 this.houses = res.data
                 this.loading = false
+                this.error = null
             })
+            .catch(err => {
+                this.reportErrors(err)
+            })
+            .finally(this.finalizeRequest)
     }
 }
 </script>
