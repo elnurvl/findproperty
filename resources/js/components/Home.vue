@@ -248,17 +248,17 @@ name: "Home",
         }
     },
     mounted() {
-        this.loading = true
-        axios.get(`/houses?name=${this.input}`)
-            .then(res => {
-                this.houses = res.data
-                this.loading = false
-                this.error = null
-            })
-            .catch(err => {
-                this.reportErrors(err)
-            })
-            .finally(this.finalizeRequest)
+        // this.loading = true
+        // axios.get(`/houses?name=${this.input}`)
+        //     .then(res => {
+        //         this.houses = res.data
+        //         this.loading = false
+        //         this.error = null
+        //     })
+        //     .catch(err => {
+        //         this.reportErrors(err)
+        //     })
+        //     .finally(this.finalizeRequest)
     }
 }
 </script>
