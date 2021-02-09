@@ -10,11 +10,9 @@ use Tests\TestCase;
 class HouseTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
     /**
      * @test
-     * A basic feature test example.
-     *
-     * @return void
      */
     public function index_without_filter_returns_all_houses()
     {
@@ -83,12 +81,15 @@ class HouseTest extends TestCase
         House::factory()->count(5)->create(['price' => $this->faker->numberBetween($highPrice, 10000000)]);
         House::factory()->count(1)->create(['price' => $this->faker->numberBetween(100000, $lowPrice)]);
 
+        // User enters only lowest price
         $response = $this->get("/houses?low=$lowPrice");
         $response->assertStatus(200)->assertJsonCount(8);
 
+        // User enters only highest price
         $response = $this->get("/houses?high=$highPrice");
         $response->assertStatus(200)->assertJsonCount(4);
 
+        // User enters both the lowest and the highest prices
         $response = $this->get("/houses?low=$lowPrice&high=$highPrice");
         $response->assertStatus(200)->assertJsonCount(3);
     }

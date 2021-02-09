@@ -108,7 +108,7 @@
 export default {
 name: "Home",
     data: () => ({
-        input: "",
+        input: '',
         bedrooms: null,
         bathrooms: null,
         garages: null,
@@ -138,12 +138,12 @@ name: "Home",
                     onClose: () => {
                         this.errorMessage = undefined
                     }
-                });
+                })
             }
         },
         input: function (val) {
             console.log('changed')
-            this.loading = true;
+            this.loading = true
             this.query.name = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -157,7 +157,7 @@ name: "Home",
                 .finally(this.finalizeRequest)
         },
         bedrooms: function (val) {
-            this.loading = true;
+            this.loading = true
             this.query.bedrooms = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -171,7 +171,7 @@ name: "Home",
                 .finally(this.finalizeRequest)
         },
         bathrooms: function (val) {
-            this.loading = true;
+            this.loading = true
             this.query.bathrooms = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -185,7 +185,7 @@ name: "Home",
                 .finally(this.finalizeRequest)
         },
         garages: function (val) {
-            this.loading = true;
+            this.loading = true
             this.query.garages = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -199,7 +199,7 @@ name: "Home",
                 .finally(this.finalizeRequest)
         },
         storeys: function (val) {
-            this.loading = true;
+            this.loading = true
             this.query.storeys = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -212,11 +212,11 @@ name: "Home",
                 })
                 .finally(this.finalizeRequest)
         },
-        low: function (val, old) {
+        low: function (val) {
             if (val > this.high) {
-                this.low = this.high - 1;
+                this.low = this.high - 1
             }
-            this.loading = true;
+            this.loading = true
             this.query.low = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -233,7 +233,7 @@ name: "Home",
             if (val < this.low) {
                 this.high = this.low + 1
             }
-            this.loading = true;
+            this.loading = true
             this.query.high = val
             axios.get(`/houses`, {params: this.query})
                 .then(res => {
@@ -246,19 +246,6 @@ name: "Home",
                 })
                 .finally(this.finalizeRequest)
         }
-    },
-    mounted() {
-        // this.loading = true
-        // axios.get(`/houses?name=${this.input}`)
-        //     .then(res => {
-        //         this.houses = res.data
-        //         this.loading = false
-        //         this.error = null
-        //     })
-        //     .catch(err => {
-        //         this.reportErrors(err)
-        //     })
-        //     .finally(this.finalizeRequest)
     }
 }
 </script>
