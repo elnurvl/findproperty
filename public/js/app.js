@@ -3632,7 +3632,7 @@ __webpack_require__.r(__webpack_exports__);
       low: undefined,
       high: undefined,
       loading: false,
-      houses: [],
+      properties: [],
       query: {},
       errorMessage: undefined
     };
@@ -3643,7 +3643,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     reportErrors: function reportErrors(err) {
       this.errorMessage = err;
-      this.houses = [];
+      this.properties = [];
     }
   },
   watch: {
@@ -3666,11 +3666,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log('changed');
       this.loading = true;
       this.query.name = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this2.houses = res.data;
+        _this2.properties = res.data;
         _this2.loading = false;
       })["catch"](function (err) {
         _this2.reportErrors(err);
@@ -3681,11 +3681,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.bedrooms = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this3.houses = res.data;
+        _this3.properties = res.data;
         _this3.loading = false;
       })["catch"](function (err) {
         _this3.reportErrors(err);
@@ -3696,11 +3696,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.bathrooms = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this4.houses = res.data;
+        _this4.properties = res.data;
         _this4.loading = false;
       })["catch"](function (err) {
         _this4.reportErrors(err);
@@ -3711,11 +3711,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.garages = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this5.houses = res.data;
+        _this5.properties = res.data;
         _this5.loading = false;
       })["catch"](function (err) {
         _this5.reportErrors(err);
@@ -3726,11 +3726,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.storeys = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this6.houses = res.data;
+        _this6.properties = res.data;
         _this6.loading = false;
       })["catch"](function (err) {
         _this6.reportErrors(err);
@@ -3745,11 +3745,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.low = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this7.houses = res.data;
+        _this7.properties = res.data;
         _this7.loading = false;
       })["catch"](function (err) {
         _this7.reportErrors(err);
@@ -3764,11 +3764,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.query.high = val;
-      axios.get("/houses", {
+      axios.get("/properties", {
         params: this.query
       }).then(function (res) {
         console.log(res.data);
-        _this8.houses = res.data;
+        _this8.properties = res.data;
         _this8.loading = false;
       })["catch"](function (err) {
         _this8.reportErrors(err);
@@ -100345,7 +100345,7 @@ var render = function() {
                             }
                           ],
                           staticStyle: { width: "100%" },
-                          attrs: { size: "mini", data: _vm.houses }
+                          attrs: { size: "mini", data: _vm.properties }
                         },
                         [
                           _c("el-table-column", {

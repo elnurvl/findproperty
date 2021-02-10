@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\House;
+use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class HouseFactory extends Factory
+class PropertyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = House::class;
+    protected $model = Property::class;
 
     /**
      * Define the model's default state.

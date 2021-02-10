@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\House;
+use App\Models\Property;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        House::factory(10)->create();
+        Property::factory(10)->create();
     }
 }

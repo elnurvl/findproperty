@@ -65,7 +65,7 @@
                         <el-table
                             size="mini"
                             v-loading="loading"
-                            :data="houses"
+                            :data="properties"
                             style="width: 100%">
                             <el-table-column
                                 prop="name"
@@ -116,7 +116,7 @@ name: "Home",
         low: undefined,
         high: undefined,
         loading: false,
-        houses: [],
+        properties: [],
         query: {},
         errorMessage: undefined
     }),
@@ -126,7 +126,7 @@ name: "Home",
         },
         reportErrors(err) {
             this.errorMessage = err
-            this.houses = []
+            this.properties = []
         }
     },
     watch: {
@@ -145,10 +145,10 @@ name: "Home",
             console.log('changed')
             this.loading = true
             this.query.name = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -159,10 +159,10 @@ name: "Home",
         bedrooms: function (val) {
             this.loading = true
             this.query.bedrooms = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -173,10 +173,10 @@ name: "Home",
         bathrooms: function (val) {
             this.loading = true
             this.query.bathrooms = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -187,10 +187,10 @@ name: "Home",
         garages: function (val) {
             this.loading = true
             this.query.garages = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -201,10 +201,10 @@ name: "Home",
         storeys: function (val) {
             this.loading = true
             this.query.storeys = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -218,10 +218,10 @@ name: "Home",
             }
             this.loading = true
             this.query.low = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {
@@ -235,10 +235,10 @@ name: "Home",
             }
             this.loading = true
             this.query.high = val
-            axios.get(`/houses`, {params: this.query})
+            axios.get(`/properties`, {params: this.query})
                 .then(res => {
                     console.log(res.data)
-                    this.houses = res.data
+                    this.properties = res.data
                     this.loading = false
                 })
                 .catch(err => {

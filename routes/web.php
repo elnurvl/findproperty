@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HouseController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/houses', [HouseController::class, 'index']);
+Route::get('/properties', [PropertyController::class, 'index']);
